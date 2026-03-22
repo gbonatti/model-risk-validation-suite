@@ -1,3 +1,24 @@
+# Model Risk Management & Validation Suite
+
+Uma suíte abrangente e automatizada em Python para o desenvolvimento, monitorização e validação independente de modelos financeiros (**Independent Model Validation - IMV**). 
+
+Este repositório serve como um portfólio prático das metodologias exigidas pelas principais normas financeiras e regulatórias (**IFRS 9, Basileia III, Bacen**), cobrindo múltiplos domínios de risco: Crédito, Mercado, Liquidez e Precificação de Produtos Financeiros.
+
+---
+
+## 🎯 Objetivos do Projeto
+
+* **Governança de Modelos:** Manutenção de inventário centralizado, controle de versões e materialidade.
+* **Validação de Modelos:** Avaliar a robustez matemática e estatística de modelos preditivos.
+* **Conformidade Regulatória:** Assegurar que os modelos operam dentro dos limites (Bacen, IFRS 9).
+* **Qualidade de Dados:** Auditar a integridade e disponibilidade dos dados em produção.
+* **Explicabilidade (XAI):** Garantir transparência em modelos de Machine Learning (XGBoost) via SHAP.
+
+---
+
+## 📂 Estrutura do Repositório
+
+```text
 model-risk-validation-suite/
 ├── data/                                 # Datasets, Inventário (.csv) e plots (.png)
 ├── src/                                  # Código-fonte principal
