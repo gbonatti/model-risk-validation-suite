@@ -85,4 +85,4 @@ A partir da raiz do projeto, corra:
 Bash
 pytest tests/ -v
 👨‍💻 Autor
-Gilberto Ricardo Bonatti Analista Sénior de Validação de Modelos e Risco
+Gilberto Ricardo Bonatti 
