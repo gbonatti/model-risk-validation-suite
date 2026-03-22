@@ -73,19 +73,17 @@ tests/test_model_assumptions.py: Auditoria "robótica" que estressa os axiomas m
 ⚙️ Instalação e Execução
 Instale as dependências:
 
-Bash
 pip install pandas numpy scikit-learn xgboost scipy joblib shap matplotlib seaborn pytest
 Execute a esteira (dentro da pasta src):
 
-Bash
 cd src
 python 01_data_generation.py
 python 02_model_development.py
 # Execute os demais conforme necessário
-Para executar a Auditoria Independente:
-A partir da raiz do projeto, corra:
 
-Bash
+Para executar a Auditoria Independente:
+A partir da raiz do projeto, rode:
+
 python -m pytest tests/ -v
 👨‍💻 Autor
 Gilberto Ricardo Bonatti
