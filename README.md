@@ -1,23 +1,6 @@
-# Model Risk Management & Validation Suite
-
-Uma suite abrangente e automatizada em Python para o desenvolvimento, monitorização e validação independente de modelos financeiros (Independent Model Validation - IMV). 
-
-Este repositório serve como um portfólio prático das metodologias exigidas pelas principais normas financeiras e regulatórias (IFRS 9, Basileia III, Bacen), cobrindo múltiplos domínios de risco: Crédito, Mercado, Liquidez e Precificação de Produtos Financeiros.
-
-## 🎯 Objetivos do Projeto
-
-- **Validação de Modelos:** Avaliar a robustez matemática e estatística de modelos preditivos e estruturais, garantindo a ausência de enviesamentos e a estabilidade ao longo do tempo.
-- **Conformidade Regulatória (Compliance):** Assegurar que os modelos operam dentro dos limites estabelecidos por normas internas e externas.
-- **Qualidade de Dados (Data Quality):** Auditar a integridade, fiabilidade e disponibilidade dos dados utilizados nas fases de desenvolvimento e operação.
-- **Testes de Stress & Limites:** Aplicar choques macroeconómicos e testar o comportamento assintótico das equações de precificação.
-- **Explicabilidade (XAI):** Garantir que modelos complexos (como XGBoost) respeitam a lógica económica e regulatória através de técnicas como SHAP.
-
-## 📂 Estrutura do Repositório
-
-```text
 model-risk-validation-suite/
 │
-├── data/                                 # Datasets sintéticos e artefactos (modelos .pkl, gráficos .png)
+├── data/                                 # Datasets sintéticos, Inventário (.csv) e gráficos (.png)
 ├── src/                                  # Código-fonte principal
 │   ├── 01_data_generation.py             # Geração de dados de crédito e testes de Data Quality
 │   ├── 02_model_development.py           # Treino de modelos (Regressão Logística e XGBoost)
@@ -29,7 +12,9 @@ model-risk-validation-suite/
 │   ├── 08_financial_products_pricing.py  # Precificação de Derivativos (Black-Scholes e Gregas)
 │   ├── 09_model_explainability_shap.py   # Validação de Explicabilidade com Valores SHAP
 │   ├── 10_market_risk_var_backtesting.py # Backtesting de VaR (Teste de Kupiec)
-│   └── 11_validation_dashboard_plots.py  # Geração do Dashboard de Validação Visual
+│   ├── 11_validation_dashboard_plots.py  # Geração do Dashboard de Validação Visual
+│   ├── 12_model_inventory_manager.py     # Gestão de Inventário Centralizado e Materialidade
+│   └── 13_backtesting_loss_comparison.py # Comparação Perdas Estimadas vs. Realizadas
 │
 ├── tests/                                # Testes Unitários e Validação de Premissas
 │   └── test_model_assumptions.py         # Testes rigorosos em Pytest para auditoria de limites
@@ -38,32 +23,37 @@ model-risk-validation-suite/
 
 
 📝 Resumo dos Scripts
+Governança e Inventário
+12_model_inventory_manager.py: Implementa a manutenção de um inventário centralizado de modelos, classificando-os por materialidade, risco e status de validação, conforme exigido pelas boas práticas de Governança de Risco de Modelo (MRM).
+
 Risco de Crédito & IFRS 9
-01_data_generation.py: Gera um dataset sintético focado em crédito. Calcula a probabilidade de default real (Target) e introduz ruídos/nulos para simular problemas de Data Quality e testar a resiliência do pipeline.
+01_data_generation.py: Gera dataset sintético de crédito. Calcula a probabilidade de default real e introduz ruídos/nulos para testar a resiliência do pipeline a falhas de dados.
 
-02_model_development.py: Treina os modelos de Probabilidade de Default (PD) usando Regressão Logística (benchmark regulatório) e XGBoost.
+02_model_development.py: Treina modelos de PD (Regressão Logística e XGBoost).
 
-03_model_validation.py: Validação de performance focada em discriminação, calculando Gini, Curva ROC e KS.
+03_model_validation.py: Validação de performance (Gini, Curva ROC e KS).
 
-04_model_monitoring.py: Monitorização contínua usando o Population Stability Index (PSI) para capturar a degradação e instabilidade do modelo em novas safras.
+05_ifrs9_ecl_calculation.py: Cálculo da Perda de Crédito Esperada (ECL) integrando PD, LGD e EAD.
 
-05_ifrs9_ecl_calculation.py: Calcula a Perda de Crédito Esperada (ECL) integrando as premissas de PD, Loss Given Default (LGD) e Exposure at Default (EAD).
+13_backtesting_loss_comparison.py: Realiza a avaliação periódica de desempenho comparando as perdas estimadas pelo modelo IFRS 9 contra as perdas efetivamente observadas na operação.
 
-Risco de Mercado, Liquidez e Precificação
-06_irrbb_eve_simulation.py: Simula choques paralelos na curva de taxas de juros e audita o impacto no Valor Económico do Património (EVE).
+Risco de Mercado, Liquidez e Monitoramento
+04_model_monitoring.py: Monitorização contínua via PSI (Population Stability Index) para identificar desvios populacionais.
 
-07_liquidity_risk_lcr.py: Valida as premissas de escoamento de depósitos (run-off rates) sob cenários de stress severo para auditar o indicador LCR.
+06_irrbb_eve_simulation.py: Simula choques na curva de juros para auditar o impacto no EVE.
 
-08_financial_products_pricing.py: Audita limites matemáticos e sensibilidades ("Gregas") de modelos analíticos de derivativos como o Black-Scholes.
+07_liquidity_risk_lcr.py: Valida o indicador LCR sob cenários de stress de liquidez.
 
-10_market_risk_var_backtesting.py: Aplica o Teste de Kupiec para garantir que as exceções históricas do modelo de Value at Risk (VaR) estão contidas dentro do limite estatístico aceitável.
+10_market_risk_var_backtesting.py: Aplica o Teste de Kupiec para validar exceções de modelos de VaR.
 
 Explicabilidade, Auditoria e Apresentação
-09_model_explainability_shap.py: Desconstrói o modelo XGBoost usando valores SHAP para validar a monotonicidade das variáveis, garantindo que relações como "juros altos = risco alto" são aprendidas corretamente.
+08_financial_products_pricing.py: Audita limites matemáticos e "Gregas" em precificação de derivativos.
 
-11_validation_dashboard_plots.py: Consolida as métricas críticas num Dashboard Visual gerado automaticamente, cobrindo a ROC, Calibração, Estabilidade Temporal (PSI) e impactos no IRRBB.
+09_model_explainability_shap.py: Utiliza SHAP para garantir que o modelo de ML respeita a lógica económica e não apresenta comportamentos de "caixa preta".
 
-test_model_assumptions.py (Pasta tests/): Suíte de auditoria automatizada em pytest que funciona como um validador algorítmico, estressando os axiomas e as condições de limite normativo de todos os modelos acima.
+11_validation_dashboard_plots.py: Consolida métricas em um Dashboard visual para reporte em Comitês de Risco.
+
+tests/test_model_assumptions.py: Suíte de auditoria automatizada em pytest que estressa axiomas e condições de limite normativo.
 
 ⚙️ Instalação e Execução
 Para rodar todo o portfólio localmente, é recomendada a utilização de um ambiente virtual Python (versão 3.8+).
@@ -72,17 +62,17 @@ Instale as bibliotecas e dependências:
 
 Bash
 pip install pandas numpy scikit-learn xgboost scipy joblib shap matplotlib seaborn pytest
-Navegue até a pasta de código-fonte e execute a esteira sequencialmente:
+Execute a esteira sequencialmente (dentro da pasta src):
 
 Bash
 cd src
 python 01_data_generation.py
 python 02_model_development.py
-# ... e assim sucessivamente para os outros scripts
+# ... execute os demais conforme necessário
 Para executar a Suíte de Auditoria Independente:
 A partir da raiz do projeto, corra:
 
 Bash
-pytest tests/ -v
+python -m pytest tests/ -v
 👨‍💻 Autor
-Gilberto Ricardo Bonatti 
+Gilberto Ricardo Bonatti

@@ -1,0 +1,5 @@
+model_id,nome_modelo,finalidade,responsavel,materialidade,status_validacao,ultima_validacao,versao,grau_exposicao
+MOD-CR-001,PD_IFRS9_Varejo,Provisão de Crédito,Risco de Crédito,Alta,Validado,2025-12-10,2.1.0,Crítico
+MOD-MK-002,VaR_Estatistico_Mesa,Risco de Mercado,Tesouraria,Alta,Em Revisão,2026-03-01,1.0.4,Crítico
+MOD-LQ-003,LCR_Stress_Test,Risco de Liquidez,Financeiro,Média,Aprovado com Ressalvas,2026-01-15,3.0.0,Monitoramento
+MOD-PR-004,Black_Scholes_Call,Precificação Derivativos,Mesa de Operações,Baixa,Validado,2025-11-20,1.0.0,Informativo
