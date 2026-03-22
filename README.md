@@ -13,6 +13,7 @@ Este repositório serve como um portfólio prático das metodologias exigidas pe
 * **Conformidade Regulatória:** Assegurar que os modelos operam dentro dos limites (Bacen, IFRS 9).
 * **Qualidade de Dados:** Auditar a integridade e disponibilidade dos dados em produção.
 * **Explicabilidade (XAI):** Garantir transparência em modelos de Machine Learning (XGBoost) via SHAP.
+* **Prevenção a Fraude & PLD:** Utilização de métodos estatísticos para detecção de anomalias transacionais.
 
 ---
 
@@ -34,41 +35,41 @@ model-risk-validation-suite/
 │   ├── 10_market_risk_var_backtesting.py # Backtesting de VaR (Teste de Kupiec)
 │   ├── 11_validation_dashboard_plots.py  # Dashboard Visual de Validação
 │   ├── 12_model_inventory_manager.py     # Gestão de Inventário e Materialidade
-│   └── 13_backtesting_loss_comparison.py # Comparação Estimado vs. Realizado
+│   ├── 13_backtesting_loss_comparison.py # Comparação Estimado vs. Realizado
+│   ├── 14_irrbb_nii_sensitivity.py       # Sensibilidade da Margem Financeira (NII)
+│   ├── 15_liquidity_cashflow_stress.py   # Horizonte de Sobrevivência de Caixa
+│   └── 16_fraud_detection_benford.py     # Auditoria de PLD (Lei de Benford)
 ├── tests/                                # Auditoria Automatizada
 │   └── test_model_assumptions.py         # Testes rigorosos em Pytest
 └── README.md                             # Documentação do projeto
 
 📝 Resumo dos Scripts
 🏛️ Governança e Inventário
-12_model_inventory_manager.py: Mantém o inventário centralizado, classificando modelos por materialidade e status de validação (requisito de Governança de Risco de Modelo - MRM).
+12_model_inventory_manager.py: Mantém o inventário centralizado, classificando modelos por materialidade e status de validação (MRM).
 
 💳 Risco de Crédito & IFRS 9
-01_data_generation.py: Gera dados sintéticos e injeta falhas propositais para testar a resiliência do modelo.
+01_data_generation.py: Gera dados sintéticos e injeta falhas propositais para testar a resiliência.
 
 02_model_development.py: Compara modelos tradicionais e de ML para Probabilidade de Default.
-
-03_model_validation.py: Valida o poder discriminatório (Gini e KS).
-
-05_ifrs9_ecl_calculation.py: Calcula a provisão de perda esperada (ECL).
 
 13_backtesting_loss_comparison.py: Avalia o desempenho real comparando a perda estimada vs. a inadimplência observada.
 
 📈 Risco de Mercado, Liquidez e Monitoramento
-04_model_monitoring.py: Detecta desvios populacionais (PSI).
+06_irrbb_eve_simulation.py: Mede a sensibilidade do patrimônio a choques na curva de juros (EVE).
 
-06_irrbb_eve_simulation.py: Mede a sensibilidade do património a choques na curva de juros.
+14_irrbb_nii_sensitivity.py: Audita o impacto de variações de taxas de juros na Margem Financeira (NII).
 
-07_liquidity_risk_lcr.py: Audita a solvência em cenários de stress de 30 dias.
+15_liquidity_cashflow_stress.py: Valida o horizonte de sobrevivência em cenários de estresse severo de fluxo de caixa.
 
-10_market_risk_var_backtesting.py: Valida estatisticamente o modelo de VaR.
+10_market_risk_var_backtesting.py: Valida estatisticamente o modelo de VaR via teste de Kupiec.
+
+🛡️ Prevenção a Fraude e PLD
+16_fraud_detection_benford.py: Aplica a Lei de Benford para identificar anomalias estatísticas em volumes transacionais, auxiliando na prevenção à lavagem de dinheiro.
 
 🔍 Explicabilidade e Apresentação
-09_model_explainability_shap.py: Garante que o modelo de ML não é uma "caixa preta", validando a lógica económica das variáveis.
+09_model_explainability_shap.py: Valida a lógica econômica das variáveis em modelos de Machine Learning.
 
-11_validation_dashboard_plots.py: Gera o Dashboard visual para reporte executivo.
-
-tests/test_model_assumptions.py: Auditoria "robótica" que estressa os axiomas matemáticos dos modelos.
+11_validation_dashboard_plots.py: Gera o Dashboard visual para reporte executivo e comitês.
 
 ⚙️ Instalação e Execução
 Instale as dependências:
@@ -80,10 +81,10 @@ cd src
 python 01_data_generation.py
 python 02_model_development.py
 # Execute os demais conforme necessário
-
 Para executar a Auditoria Independente:
 A partir da raiz do projeto, rode:
 
+Bash
 python -m pytest tests/ -v
 👨‍💻 Autor
 Gilberto Ricardo Bonatti
