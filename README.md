@@ -1,19 +1,18 @@
-# Model Risk Management & Validation Suite
+# Model Risk Validation Suite
 
-Uma suíte abrangente e automatizada em Python para o desenvolvimento, monitorização e validação independente de modelos financeiros (**Independent Model Validation - IMV**). 
+Uma suíte técnica em Python para o desenvolvimento, monitoramento e validação de modelos financeiros (**Independent Model Validation - IMV**). 
 
-Este repositório serve como um portfólio prático das metodologias exigidas pelas principais normas financeiras e regulatórias (**IFRS 9, Basileia III, Bacen**), cobrindo múltiplos domínios de risco: Crédito, Mercado, Liquidez e Precificação de Produtos Financeiros.
+Este repositório reúne implementações práticas de metodologias exigidas pelas normas financeiras (**IFRS 9, Basileia III, Bacen**), cobrindo riscos de Crédito, Mercado, Liquidez e Auditoria de Dados.
 
 ---
 
-## 🎯 Objetivos do Projeto
+## 🎯 Escopo do Projeto
 
-* **Governança de Modelos:** Manutenção de inventário centralizado, controle de versões e materialidade.
-* **Validação de Modelos:** Avaliar a robustez matemática e estatística de modelos preditivos.
-* **Conformidade Regulatória:** Assegurar que os modelos operam dentro dos limites (Bacen, IFRS 9).
-* **Qualidade de Dados:** Auditar a integridade e disponibilidade dos dados em produção.
-* **Explicabilidade (XAI):** Garantir transparência em modelos de Machine Learning (XGBoost) via SHAP.
-* **Prevenção a Fraude & PLD:** Utilização de métodos estatísticos para detecção de anomalias transacionais.
+* **Execução de Validação:** Aplicar testes estatísticos para medir a robustez de modelos preditivos.
+* **Monitoramento de Performance:** Acompanhar a estabilidade dos modelos (PSI) e realizar backtesting periódico.
+* **Data Quality:** Auditar a integridade das bases de dados utilizadas em modelagem.
+* **Explicabilidade:** Utilizar técnicas de SHAP para interpretar as saídas de modelos de Machine Learning.
+* **Stress Testing:** Simular impactos de cenários macroeconômicos em indicadores de capital e liquidez.
 
 ---
 
@@ -21,70 +20,54 @@ Este repositório serve como um portfólio prático das metodologias exigidas pe
 
 ```text
 model-risk-validation-suite/
-├── data/                                 # Datasets, Inventário (.csv) e plots (.png)
-├── src/                                  # Código-fonte principal
-│   ├── 01_data_generation.py             # Geração de dados e Data Quality
-│   ├── 02_model_development.py           # Treino de modelos (Reg. Logística e XGBoost)
-│   ├── 03_model_validation.py            # Validação estatística (KS, Gini, Calibração)
-│   ├── 04_model_monitoring.py            # Monitorização de degradação (PSI)
+├── data/                                 # Datasets sintéticos e artefatos de saída
+├── src/                                  # Scripts de execução técnica
+│   ├── 01_data_generation.py             # Preparação de dados e testes de DQ
+│   ├── 02_model_development.py           # Treinamento de modelos (Logística e XGBoost)
+│   ├── 03_model_validation.py            # Testes de discriminação (KS, Gini)
+│   ├── 04_model_monitoring.py            # Cálculo de estabilidade populacional (PSI)
 │   ├── 05_ifrs9_ecl_calculation.py       # Cálculo de Perda Esperada (ECL)
-│   ├── 06_irrbb_eve_simulation.py        # Risco de Taxa de Juro (EVE)
-│   ├── 07_liquidity_risk_lcr.py          # Risco de Liquidez (LCR)
-│   ├── 08_financial_products_pricing.py  # Precificação e "Gregas" (Black-Scholes)
-│   ├── 09_model_explainability_shap.py   # Explicabilidade com Valores SHAP
-│   ├── 10_market_risk_var_backtesting.py # Backtesting de VaR (Teste de Kupiec)
-│   ├── 11_validation_dashboard_plots.py  # Dashboard Visual de Validação
-│   ├── 12_model_inventory_manager.py     # Gestão de Inventário e Materialidade
-│   ├── 13_backtesting_loss_comparison.py # Comparação Estimado vs. Realizado
-│   ├── 14_irrbb_nii_sensitivity.py       # Sensibilidade da Margem Financeira (NII)
-│   ├── 15_liquidity_cashflow_stress.py   # Horizonte de Sobrevivência de Caixa
-│   └── 16_fraud_detection_benford.py     # Auditoria de PLD (Lei de Benford)
+│   ├── 06_irrbb_eve_simulation.py        # Simulação de risco de taxa de juro (EVE)
+│   ├── 07_liquidity_risk_lcr.py          # Monitoramento de liquidez (LCR)
+│   ├── 08_financial_products_pricing.py  # Auditoria de precificação (Black-Scholes)
+│   ├── 09_model_explainability_shap.py   # Interpretação de modelos com SHAP
+│   ├── 10_market_risk_var_backtesting.py # Backtesting de VaR (Kupiec)
+│   ├── 11_validation_dashboard_plots.py  # Visualização de métricas técnicas
+│   ├── 12_model_inventory_manager.py     # Apoio à organização do inventário de modelos
+│   ├── 13_backtesting_loss_comparison.py # Comparação entre estimado vs. observado
+│   ├── 14_irrbb_nii_sensitivity.py       # Sensibilidade da margem financeira (NII)
+│   ├── 15_liquidity_cashflow_stress.py   # Teste de estresse de fluxo de caixa
+│   └── 16_fraud_detection_benford.py     # Detecção de anomalias estatísticas (PLD)
 ├── tests/                                # Auditoria Automatizada
-│   └── test_model_assumptions.py         # Testes rigorosos em Pytest
-└── README.md                             # Documentação do projeto
+│   └── test_model_assumptions.py         # Testes unitários de premissas (Pytest)
+└── README.md                             # Documentação técnica
 
-📝 Resumo dos Scripts
-🏛️ Governança e Inventário
-12_model_inventory_manager.py: Mantém o inventário centralizado, classificando modelos por materialidade e status de validação (MRM).
+📝 Resumo das Atividades Técnicas
+🛠️ Modelagem & Crédito
+01 a 03: Geração de safras, tratamento de nulos, treinamento de algoritmos e validação de poder preditivo (Gini/KS).
 
-💳 Risco de Crédito & IFRS 9
-01_data_generation.py: Gera dados sintéticos e injeta falhas propositais para testar a resiliência.
+05 e 13: Execução do cálculo de ECL (IFRS 9) e realização de backtesting para verificar a aderência das perdas estimadas.
 
-02_model_development.py: Compara modelos tradicionais e de ML para Probabilidade de Default.
+📊 Mercado, Liquidez & Monitoramento
+04, 06 e 14: Monitoramento de data drift e análise de sensibilidade do balanço a choques de juros (EVE e NII).
 
-13_backtesting_loss_comparison.py: Avalia o desempenho real comparando a perda estimada vs. a inadimplência observada.
+07 e 15: Acompanhamento de indicadores de liquidez e simulação de sobrevivência de caixa em estresse.
 
-📈 Risco de Mercado, Liquidez e Monitoramento
-06_irrbb_eve_simulation.py: Mede a sensibilidade do patrimônio a choques na curva de juros (EVE).
+10: Validação estatística de modelos de VaR para risco de mercado.
 
-14_irrbb_nii_sensitivity.py: Audita o impacto de variações de taxas de juros na Margem Financeira (NII).
+🔍 Auditoria e Interpretação
+09: Tradução das variáveis do XGBoost para garantir que o modelo segue premissas econômicas.
 
-15_liquidity_cashflow_stress.py: Valida o horizonte de sobrevivência em cenários de estresse severo de fluxo de caixa.
+16: Aplicação da Lei de Benford para identificar desvios em bases transacionais.
 
-10_market_risk_var_backtesting.py: Valida estatisticamente o modelo de VaR via teste de Kupiec.
-
-🛡️ Prevenção a Fraude e PLD
-16_fraud_detection_benford.py: Aplica a Lei de Benford para identificar anomalias estatísticas em volumes transacionais, auxiliando na prevenção à lavagem de dinheiro.
-
-🔍 Explicabilidade e Apresentação
-09_model_explainability_shap.py: Valida a lógica econômica das variáveis em modelos de Machine Learning.
-
-11_validation_dashboard_plots.py: Gera o Dashboard visual para reporte executivo e comitês.
+tests/: Rotinas de teste automatizado para garantir que os modelos respeitam limites normativos.
 
 ⚙️ Instalação e Execução
 Instale as dependências:
 
 pip install pandas numpy scikit-learn xgboost scipy joblib shap matplotlib seaborn pytest
-Execute a esteira (dentro da pasta src):
+Execute os testes de integridade:
 
-cd src
-python 01_data_generation.py
-python 02_model_development.py
-# Execute os demais conforme necessário
-Para executar a Auditoria Independente:
-A partir da raiz do projeto, rode:
-
-Bash
 python -m pytest tests/ -v
 👨‍💻 Autor
-Gilberto Ricardo Bonatti
+Gilberto Ricardo Bonatti - Analista de Validação de Modelos e Dados
