@@ -1,0 +1,35 @@
+# Artefatos gerados pelo pipeline (não versionar)
+data/*.pkl
+data/*.parquet
+data/plots/
+
+# Cache do Python
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+*.py[cod]
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+.env
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Manter a estrutura da pasta data (sem os artefatos)
+!data/.gitkeep
+!data/plots/.gitkeep
