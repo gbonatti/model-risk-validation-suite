@@ -33,9 +33,9 @@ def generate_credit_data(n_samples=50000, random_state=42):
     prob_default = 1 / (1 + np.exp(-z))
     df['default_12m'] = (prob_default > np.percentile(prob_default, 85)).astype(int) 
     
-    # 3. Inserindo ruído (DQ)
-    df.loc[df.sample(frac=0.02).index, 'renda_mensal'] = np.nan
-    df.loc[df.sample(frac=0.01).index, 'score_bureau'] = -999 
+    # 3. Inserindo ruído (DQ) — random_state garante reprodutibilidade
+    df.loc[df.sample(frac=0.02, random_state=random_state).index, 'renda_mensal'] = np.nan
+    df.loc[df.sample(frac=0.01, random_state=random_state + 1).index, 'score_bureau'] = -999
     
     return df
 
