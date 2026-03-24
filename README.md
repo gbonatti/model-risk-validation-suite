@@ -167,7 +167,7 @@ Os testes são independentes do pipeline (não requerem os `.pkl` gerados) e val
 
 ---
 
-## 👨‍💻 Autor (Uso do Claude pra otmização)
+👨‍💻 Autor (Uso do Claude pra otmização)
 
 **Gilberto Ricardo Bonatti** - Especialista em Modelagem Numérica
 
