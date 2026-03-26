@@ -34,18 +34,18 @@ O pipeline é composto por **11 scripts sequenciais** e uma **suite de testes au
         │
         ▼
 02_model_development ──────────────────────────────────┐
-        │                                               │
-        ▼                                               │
-03_model_validation      04_model_monitoring            │
-                                                        │
+        │                                              │
+        ▼                                              │
+03_model_validation      04_model_monitoring           │
+                                                       │
 05_ifrs9_ecl  ←── usa modelo pkl                       │
 06_irrbb_eve  ←── independente                         │
 07_lcr        ←── independente                         │
 08_pricing    ←── independente                         │
 09_shap       ←── usa modelo pkl                       │
 10_var_bt     ←── independente                         │
-        │                                               │
-        ▼                                               │
+        │                                              │
+        ▼                                              │
 11_dashboard  ←── consolida tudo ◄─────────────────────┘
         │
         ▼
